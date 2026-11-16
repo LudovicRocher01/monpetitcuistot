@@ -20,9 +20,17 @@
   <link rel="apple-touch-icon" href="img/apple-touch-icon.png">
   <link rel="stylesheet" href="style.css">
   <style>
-    .code { font: 700 2rem/1.2 ui-monospace, Menlo, monospace; letter-spacing: 0.2em; text-align: center; color: var(--cuivre); margin: 8px 0 0; }
-    .ouvrir { display: flex; width: 100%; margin: 16px 0 8px; }
+    .ouvrir { display: flex; width: 100%; margin: 4px 0 8px; }
     .discret { color: var(--secondaire); font-size: 0.95rem; text-align: center; }
+    .photo { width: 100%; border-radius: 20px; display: block; aspect-ratio: 4 / 3; object-fit: cover; margin-bottom: 16px; }
+    .infos { display: flex; flex-wrap: wrap; gap: 8px 16px; justify-content: center; color: var(--secondaire); font-size: 0.95rem; margin: 0; padding: 0; list-style: none; }
+    .liste-ingredients { margin: 0; padding: 0; list-style: none; }
+    .liste-ingredients li { display: flex; justify-content: space-between; gap: 16px; padding: 8px 0; border-bottom: 1px solid var(--bordure, rgba(128,100,80,.18)); }
+    .liste-ingredients li:last-child { border-bottom: 0; }
+    .liste-ingredients .qte { color: var(--secondaire); white-space: nowrap; }
+    .etapes { margin: 0; padding-left: 1.4em; }
+    .etapes li { margin: 0 0 12px; line-height: 1.55; }
+    .chargement { text-align: center; color: var(--secondaire); }
   </style>
 </head>
 <body>
@@ -41,8 +49,28 @@
 
     <section class="carte" id="avec-code">
       <a class="bouton ouvrir" id="ouvrir" href="#">Ouvrir dans l'app</a>
-      <p class="discret">Rien ne se passe ? Ouvre ce lien dans Safari ou Chrome, ou entre le code dans l'app : « Ajouter » sur l'accueil, puis « Recette partagée ».</p>
-      <p class="code" id="code"></p>
+      <p class="discret">Pas encore l'app ? La recette est juste en dessous. <a href="./">Découvrir Mon Petit Cuistot</a></p>
+    </section>
+
+    <p class="chargement" id="chargement">Le cuistot sort la recette du four…</p>
+
+    <div id="recette" hidden>
+      <section class="carte">
+        <img class="photo" id="photo" alt="" hidden>
+        <ul class="infos" id="infos"></ul>
+      </section>
+      <section class="carte">
+        <h2 id="titre-ingredients">Ingrédients</h2>
+        <ul class="liste-ingredients" id="ingredients"></ul>
+      </section>
+      <section class="carte">
+        <h2>Étapes</h2>
+        <ol class="etapes" id="etapes"></ol>
+      </section>
+    </div>
+
+    <section class="carte" id="introuvable" hidden>
+      <p>Cette recette n'est plus partagée. Demande à ton ami de te la renvoyer.</p>
     </section>
 
     <section class="carte" id="sans-code" hidden>
@@ -53,29 +81,89 @@
   <footer class="pied">
     <div class="conteneur">
       <a class="marque" href="./"><img src="img/icone.webp" alt="" width="36" height="36" loading="lazy">Mon Petit Cuistot</a>
-      <nav aria-label="Liens utiles"><a href="confidentialite.html">Confidentialité</a><a href="mailto:contact@monpetitcuistot.fr">contact@monpetitcuistot.fr</a></nav>
+      <nav aria-label="Liens utiles"><a href="conditions.html">Conditions</a><a href="confidentialite.html">Confidentialité</a><a href="mailto:contact@monpetitcuistot.fr">contact@monpetitcuistot.fr</a></nav>
     </div>
   </footer>
 
   <script>
-    // Code de 8 caractères sans I, O, 0 ni 1 (comme dans l'app), titre facultatif.
+    // Lecture publique d'un partage par son code (fonction recette_partagee,
+    // ouverte aux visiteurs sans compte). Clé publique : la sécurité repose sur
+    // les règles de la base, pas sur ce secret.
+    const SUPABASE = 'https://yxatgrtdvtpkqlsymrli.supabase.co';
+    const CLE = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inl4YXRncnRkdnRwa3Fsc3ltcmxpIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTE0ODkxNDYsImV4cCI6MjEwNzA2NTE0Nn0.5NvIiAhUwl_Ow0NmlSVDUcrDLx8ewRtfzESolM2f6G0';
+
+    const $ = (id) => document.getElementById(id);
     const params = new URLSearchParams(location.search);
     const code = (params.get('c') || '').toUpperCase().replace(/[^A-Z0-9]/g, '');
     const titre = (params.get('t') || '').trim();
 
+    function nommer(t) {
+      if (!t) return;
+      $('titre').textContent = t;
+      document.title = t + ' · Mon Petit Cuistot';
+    }
+
+    // « **terme** » en gras, sans jamais interpréter de HTML.
+    function texteAvecGras(element, texte) {
+      String(texte).split('**').forEach((morceau, i) => {
+        if (!morceau) return;
+        if (i % 2) { const b = document.createElement('strong'); b.textContent = morceau; element.append(b); }
+        else element.append(document.createTextNode(morceau));
+      });
+    }
+
+    function quantite(ing, facteur) {
+      const q = Number(ing.quantite_base);
+      if (!q) return ing.unite || '';
+      const v = Math.round(q * facteur * 100) / 100;
+      return (String(v).replace('.', ',') + ' ' + (ing.unite || '')).trim();
+    }
+
+    function afficher(ligne) {
+      const r = ligne.data || {};
+      nommer(r.titre || titre);
+      if (ligne.auteur) $('sous-titre').textContent = 'Recette de ' + ligne.auteur;
+      if (ligne.photo) { $('photo').src = 'data:image/jpeg;base64,' + ligne.photo; $('photo').alt = r.titre || ''; $('photo').hidden = false; }
+      const personnes = Number(r.nombre_personnes_base) || 2;
+      const infos = [personnes + ' personne' + (personnes > 1 ? 's' : '')];
+      const prep = Number(r.temps_preparation_minutes) || 0, cuisson = Number(r.temps_cuisson_minutes) || 0;
+      if (prep) infos.push('Préparation ' + prep + ' min');
+      if (cuisson) infos.push('Cuisson ' + cuisson + ' min');
+      if (r.nutrition && r.nutrition.kcal) infos.push('≈ ' + Math.round(r.nutrition.kcal) + ' kcal par portion');
+      infos.forEach((t) => { const li = document.createElement('li'); li.textContent = t; $('infos').append(li); });
+      $('titre-ingredients').textContent = 'Ingrédients pour ' + personnes;
+      (r.liste-ingredients || []).forEach((ing) => {
+        const li = document.createElement('li');
+        const nom = document.createElement('span'); nom.textContent = ing.nom || '';
+        const qte = document.createElement('span'); qte.className = 'qte'; qte.textContent = quantite(ing, 1);
+        li.append(nom, qte); $('ingredients').append(li);
+      });
+      (r.etapes || []).forEach((e) => { const li = document.createElement('li'); texteAvecGras(li, e.texte || ''); $('etapes').append(li); });
+      $('recette').hidden = false;
+    }
+
     if (!/^[A-HJ-NP-Z2-9]{8}$/.test(code)) {
-      document.getElementById('avec-code').hidden = true;
-      document.getElementById('sans-code').hidden = false;
+      $('avec-code').hidden = true;
+      $('chargement').hidden = true;
+      $('sans-code').hidden = false;
     } else {
-      if (titre) {
-        document.getElementById('titre').textContent = titre;
-        document.title = titre + ' · Mon Petit Cuistot';
-      }
-      document.getElementById('code').textContent = code.slice(0, 4) + '-' + code.slice(4);
+      nommer(titre);
       const android = /android/i.test(navigator.userAgent);
-      document.getElementById('ouvrir').href = android
+      $('ouvrir').href = android
         ? 'intent://recette/' + code + '#Intent;scheme=monpetitcuistot;package=com.ludovicrocher.monpetitcuistot;end'
         : 'monpetitcuistot://recette/' + code;
+      fetch(SUPABASE + '/rest/v1/rpc/recette_partagee', {
+        method: 'POST',
+        headers: { 'apikey': CLE, 'Authorization': 'Bearer ' + CLE, 'Content-Type': 'application/json' },
+        body: JSON.stringify({ p_code: code }),
+      })
+        .then((rep) => rep.ok ? rep.json() : Promise.reject(rep.status))
+        .then((lignes) => {
+          $('chargement').hidden = true;
+          if (Array.isArray(lignes) && lignes.length && lignes[0].data) afficher(lignes[0]);
+          else $('introuvable').hidden = false;
+        })
+        .catch(() => { $('chargement').textContent = 'Impossible de charger la recette pour le moment. Réessaie dans un instant, ou ouvre-la dans l\'app.'; });
     }
   </script>
 </body>

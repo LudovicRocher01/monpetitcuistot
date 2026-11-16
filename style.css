@@ -335,7 +335,8 @@ section.bloc { padding: 96px 0; }
 .toques svg { width: 26px; height: 26px; }
 .toques svg.vide { color: var(--bordure); }
 .code-partage { margin-top: 12px; display: flex; align-items: center; justify-content: space-between; gap: 10px; background: var(--cuivre-clair); border-radius: 14px; padding: 10px 14px; }
-.code-partage b { font: 700 1.1rem/1 ui-monospace, Menlo, monospace; letter-spacing: 0.18em; color: var(--cuivre-fonce); }
+.code-partage span { color: var(--secondaire); font-size: 0.9rem; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.code-partage b { font-weight: 700; color: var(--cuivre-fonce); }
 
 /* ------------------------------------------------------------ Marmite (démo) */
 .marmite { background: var(--surface); border-radius: 36px; padding: 56px; display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 48px; align-items: center; }

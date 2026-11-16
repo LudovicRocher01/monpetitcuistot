@@ -1,0 +1,13 @@
+[
+  {
+    "relation": ["delegate_permission/common.handle_all_urls"],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "com.ludovicrocher.monpetitcuistot",
+      "sha256_cert_fingerprints": [
+        "23:3D:05:AC:3F:31:EA:10:84:36:19:1C:7F:66:14:5C:6D:DD:7E:87:FA:45:9A:17:88:99:AF:E6:20:D5:F0:BC",
+        "D9:6B:F5:12:25:60:38:77:0B:A6:6B:B9:3D:FB:D7:68:C4:D0:6F:7D:40:7F:9A:7C:B4:3F:E6:0D:24:33:0D:84"
+      ]
+    }
+  }
+]

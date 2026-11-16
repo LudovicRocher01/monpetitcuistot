@@ -1,0 +1,12 @@
+{
+  "applinks": {
+    "details": [
+      {
+        "appIDs": ["96WJWVZ5ZV.com.ludovicrocher.monpetitcuistot"],
+        "components": [
+          { "/": "/r.html", "comment": "Recette partagée : ouvre l'app" }
+        ]
+      }
+    ]
+  }
+}

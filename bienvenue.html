@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Adresse confirmée · Mon Petit Cuistot</title>
+  <meta name="robots" content="noindex">
+  <meta name="theme-color" content="#fbf4e9" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#1c1512" media="(prefers-color-scheme: dark)">
+  <link rel="icon" type="image/png" href="img/favicon.png">
+  <link rel="apple-touch-icon" href="img/apple-touch-icon.png">
+  <link rel="stylesheet" href="style.css">
+  <script>
+    // Le lien de confirmation (Supabase) arrive ici. On lit le résultat, puis on retire
+    // les jetons de l'adresse : la page ne les garde ni ne les envoie nulle part.
+    var retour = new URLSearchParams(location.hash.slice(1) || location.search.slice(1));
+    var erreur = retour.get('error_description') || retour.get('error');
+    if (location.hash || location.search) history.replaceState(null, '', location.pathname);
+  </script>
+</head>
+<body>
+  <header class="nav defile">
+    <div class="conteneur">
+      <a class="marque" href="./"><img src="img/icone.webp" alt="" width="36" height="36">Mon Petit Cuistot</a>
+      <nav class="nav-liens"><a class="bouton petit" href="./">Découvrir l'app</a></nav>
+    </div>
+  </header>
+
+  <main class="page" style="text-align:center">
+    <section id="ok">
+      <img src="img/cuistot-gold.webp" alt="Le petit cuistot fier de sa médaille" width="150" height="275" style="width:150px;margin:0 auto">
+      <h1>Adresse confirmée, chef&nbsp;!</h1>
+      <p class="sous-titre">Ton compte est prêt. Retourne dans l'application Mon Petit Cuistot et connecte-toi avec ton e-mail et ton mot de passe.</p>
+      <div class="carte" style="margin-top:28px;text-align:left">
+        <h2>Et maintenant&nbsp;?</h2>
+        <p>Demande tes premières idées au cuistot avec le « + » au centre de la barre, remplis ton stock, et tes recettes te suivront sur tous tes appareils.</p>
+      </div>
+    </section>
+
+    <section id="echec" hidden>
+      <img src="img/cuistot-fridge.webp" alt="Le petit cuistot cherche dans le frigo" width="150" height="208" style="width:150px;margin:0 auto">
+      <h1>Ce lien a refroidi</h1>
+      <p class="sous-titre">Il a expiré ou a déjà servi. Si ton adresse est déjà confirmée, connecte-toi simplement dans l'application. Sinon, recrée ton compte pour recevoir un nouveau lien.</p>
+      <p class="sous-titre" style="margin-top:20px">Un souci&nbsp;? Écris-nous à <a href="mailto:contact@monpetitcuistot.fr">contact@monpetitcuistot.fr</a>.</p>
+    </section>
+  </main>
+
+  <script>
+    if (erreur) {
+      document.getElementById('ok').hidden = true;
+      document.getElementById('echec').hidden = false;
+      document.title = 'Lien expiré · Mon Petit Cuistot';
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Une recette pour toi · Mon Petit Cuistot</title>
+  <meta name="description" content="Une recette partagée avec Mon Petit Cuistot.">
+  <meta name="robots" content="noindex">
+  <link rel="icon" href="cuistot.png">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .code { font: 700 2rem/1.2 ui-monospace, Menlo, monospace; letter-spacing: 0.2em; text-align: center; color: var(--cuivre); margin: 8px 0 0; }
+    .bouton {
+      display: block; text-align: center; text-decoration: none; font-weight: 700;
+      background: var(--cuivre); color: var(--papier); border-radius: 999px; padding: 16px; margin: 16px 0 8px;
+    }
+    .discret { color: var(--secondaire); font-size: 0.95rem; text-align: center; }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <img src="cuistot.png" alt="La mascotte de Mon Petit Cuistot, un petit chef qui salue">
+      <h1 id="titre">Une recette pour toi</h1>
+      <p class="sous-titre" id="sous-titre">Un ami te partage une recette de son carnet.</p>
+    </header>
+
+    <section class="carte" id="avec-code">
+      <a class="bouton" id="ouvrir" href="#">Ouvrir dans l'app</a>
+      <p class="discret">Rien ne se passe ? Ouvre ce lien dans Safari ou Chrome, ou entre le code dans l'app : « Ajouter » sur l'accueil, puis « Recette partagée ».</p>
+      <p class="code" id="code"></p>
+    </section>
+
+    <section class="carte" id="sans-code" hidden>
+      <p>Ce lien de partage est incomplet. Demande à ton ami de te renvoyer la recette.</p>
+    </section>
+
+    <footer><a href="index.html">Mon Petit Cuistot</a> · <a href="confidentialite.html">Confidentialité</a></footer>
+  </main>
+
+  <script>
+    // Code de 8 caractères sans I, O, 0 ni 1 (comme dans l'app), titre facultatif.
+    const params = new URLSearchParams(location.search);
+    const code = (params.get('c') || '').toUpperCase().replace(/[^A-Z0-9]/g, '');
+    const titre = (params.get('t') || '').trim();
+
+    if (!/^[A-HJ-NP-Z2-9]{8}$/.test(code)) {
+      document.getElementById('avec-code').hidden = true;
+      document.getElementById('sans-code').hidden = false;
+    } else {
+      if (titre) {
+        document.getElementById('titre').textContent = titre;
+        document.title = titre + ' · Mon Petit Cuistot';
+      }
+      document.getElementById('code').textContent = code.slice(0, 4) + '-' + code.slice(4);
+      const android = /android/i.test(navigator.userAgent);
+      document.getElementById('ouvrir').href = android
+        ? 'intent://recette/' + code + '#Intent;scheme=monpetitcuistot;package=com.ludovicrocher.monpetitcuistot;end'
+        : 'monpetitcuistot://recette/' + code;
+    }
+  </script>
+</body>
+</html>

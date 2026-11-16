@@ -3,41 +3,372 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Mon Petit Cuistot</title>
-  <meta name="description" content="Mon Petit Cuistot : des idées de recettes sur mesure, ton carnet, ton stock et ta liste de courses.">
-  <link rel="icon" href="cuistot.png">
+  <title>Mon Petit Cuistot · Qu'est-ce qu'on mange ce soir ?</title>
+  <meta name="description" content="L'assistant de cuisine du quotidien : des idées de recettes sur mesure selon tes envies et ton frigo, ton carnet, ton stock anti-gaspi, le menu de la semaine et la liste de courses. Gratuit, sans pub.">
+  <link rel="canonical" href="https://monpetitcuistot.fr/">
+  <meta name="theme-color" content="#fbf4e9" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#1c1512" media="(prefers-color-scheme: dark)">
+  <link rel="icon" type="image/png" href="img/favicon.png">
+  <link rel="apple-touch-icon" href="img/apple-touch-icon.png">
+  <link rel="preload" href="fonts/Fraunces-Bold.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="fonts/DMSans-Regular.woff2" as="font" type="font/woff2" crossorigin>
+
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="fr_FR">
+  <meta property="og:site_name" content="Mon Petit Cuistot">
+  <meta property="og:url" content="https://monpetitcuistot.fr/">
+  <meta property="og:title" content="Mon Petit Cuistot · Qu'est-ce qu'on mange ce soir ?">
+  <meta property="og:description" content="Des idées de recettes sur mesure, ton carnet, ton stock anti-gaspi et ta liste de courses. Gratuit, sans pub.">
+  <meta property="og:image" content="https://monpetitcuistot.fr/img/partage.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="La mascotte de Mon Petit Cuistot à côté de l'application">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "MobileApplication",
+    "name": "Mon Petit Cuistot",
+    "operatingSystem": "iOS, Android",
+    "applicationCategory": "LifestyleApplication",
+    "inLanguage": "fr",
+    "url": "https://monpetitcuistot.fr/",
+    "image": "https://monpetitcuistot.fr/img/apple-touch-icon.png",
+    "description": "Assistant de cuisine : idées de recettes sur mesure, carnet, stock anti-gaspi, menu de la semaine et liste de courses.",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "EUR" }
+  }
+  </script>
   <link rel="stylesheet" href="style.css">
+  <script>document.documentElement.classList.add('js');</script>
 </head>
 <body>
-  <main>
-    <header>
-      <img src="cuistot.png" alt="La mascotte de Mon Petit Cuistot, un petit chef qui salue">
-      <h1>Mon Petit Cuistot</h1>
-      <p class="sous-titre">Ton assistant de cuisine du quotidien, sans prise de tête.</p>
-    </header>
 
-    <section class="carte">
-      <h2>Qu'est-ce qu'on mange ?</h2>
-      <p>Dis ce qui te fait envie : le petit cuistot propose des idées adaptées à tes goûts, à ton régime et à ce qu'il y a dans ton frigo, puis rédige la recette complète.</p>
-    </section>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-coche" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" d="M5 12.5l4.2 4.2L19 7"/></symbol>
+  <symbol id="i-horloge" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5" fill="none" stroke="currentColor" stroke-width="2"/><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" d="M12 7.5V12l3 2"/></symbol>
+  <symbol id="i-etincelle" viewBox="0 0 24 24"><path fill="currentColor" d="M12 2l1.9 5.6L19.5 9.5l-5.6 1.9L12 17l-1.9-5.6L4.5 9.5l5.6-1.9zM19 15l.9 2.1L22 18l-2.1.9L19 21l-.9-2.1L16 18l2.1-.9z"/></symbol>
+  <symbol id="i-maison" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" d="M4 11l8-6.5 8 6.5V20h-5v-5h-6v5H4z"/></symbol>
+  <symbol id="i-casserole" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M4 10h16v5a5 5 0 01-5 5H9a5 5 0 01-5-5zM2 10h2M20 10h2M9 6c0-1 1-1.5 1-2.5M14 6c0-1 1-1.5 1-2.5"/></symbol>
+  <symbol id="i-livre" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" d="M4 5.5C6.5 4 9.5 4 12 6c2.5-2 5.5-2 8-.5V19c-2.5-1.5-5.5-1.5-8 .5-2.5-2-5.5-2-8-.5zM12 6v13.5"/></symbol>
+  <symbol id="i-perso" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4" fill="none" stroke="currentColor" stroke-width="2"/><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" d="M4.5 20c1.2-3.6 4-5.5 7.5-5.5s6.3 1.9 7.5 5.5"/></symbol>
+  <symbol id="i-plus" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" d="M12 5v14M5 12h14"/></symbol>
+  <symbol id="i-telephone" viewBox="0 0 24 24"><rect x="6" y="2.5" width="12" height="19" rx="3" fill="none" stroke="currentColor" stroke-width="2"/><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" d="M10.5 18.5h3"/></symbol>
+  <symbol id="i-robot" viewBox="0 0 24 24"><rect x="4" y="8" width="16" height="11" rx="4" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="9.5" cy="13.5" r="1.4" fill="currentColor"/><circle cx="14.5" cy="13.5" r="1.4" fill="currentColor"/><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" d="M8 8L6.5 4.5M16 8l1.5-3.5"/></symbol>
+  <symbol id="i-loupe" viewBox="0 0 24 24"><circle cx="11" cy="11" r="6.5" fill="none" stroke="currentColor" stroke-width="2"/><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" d="M16 16l4.5 4.5"/></symbol>
+  <symbol id="i-bouclier" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" d="M12 3l7.5 3v5.5c0 4.6-3.2 8.2-7.5 9.5-4.3-1.3-7.5-4.9-7.5-9.5V6z"/><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M8.8 12l2.2 2.2 4.4-4.4"/></symbol>
+  <symbol id="i-pub" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5" fill="none" stroke="currentColor" stroke-width="2"/><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" d="M6 6l12 12"/></symbol>
+  <symbol id="i-feuille" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" d="M5 19c0-9 5-14 15-14 0 10-5 15-14 15"/><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" d="M5 19l8-8"/></symbol>
+  <symbol id="i-cle" viewBox="0 0 24 24"><circle cx="8" cy="15" r="4" fill="none" stroke="currentColor" stroke-width="2"/><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M11 12l8-8M16 7l2.5 2.5M14 9l2 2"/></symbol>
+  <symbol id="i-courrier" viewBox="0 0 24 24"><rect x="3" y="5.5" width="18" height="13" rx="3" fill="none" stroke="currentColor" stroke-width="2"/><path fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" d="M4 7.5l8 6 8-6"/></symbol>
+  <symbol id="i-toque" viewBox="0 0 24 24"><path fill="currentColor" d="M6.5 15h11v5.2c0 .5-.4.8-.8.8H7.3c-.5 0-.8-.3-.8-.8zM6.4 13.8C4 13.3 2.5 11.3 2.8 9.1 3.1 6.9 5.1 5.4 7.3 5.6 7.9 3.5 9.8 2 12 2s4.1 1.5 4.7 3.6c2.2-.2 4.2 1.3 4.5 3.5.3 2.2-1.2 4.2-3.6 4.7z"/></symbol>
+  <symbol id="i-lampe" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" d="M8 3h8v4l-2 4v10h-4V11L8 7z"/></symbol>
+  <symbol id="i-photo" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" d="M4 8h3.5L9 5.5h6L16.5 8H20v11H4z"/><circle cx="12" cy="13.2" r="3.3" fill="none" stroke="currentColor" stroke-width="2"/></symbol>
+</svg>
 
-    <section class="carte">
-      <h2>Toute ta cuisine au même endroit</h2>
-      <ul>
-        <li>Un carnet de recettes avec photos, notes et portions ajustables.</li>
-        <li>Ton stock, avec un rappel avant les dates limites.</li>
-        <li>Le menu de la semaine et la liste de courses rangée par rayon.</li>
-        <li>Un mode « Je cuisine » pas à pas, avec minuteurs.</li>
-        <li>Le guide du Petit Cuistot : techniques, conservation et astuces anti-gaspi.</li>
-      </ul>
-    </section>
+<header class="nav" id="nav">
+  <div class="conteneur">
+    <a class="marque" href="#haut"><img src="img/icone.webp" alt="" width="36" height="36">Mon Petit Cuistot</a>
+    <nav class="nav-liens" aria-label="Sections">
+      <a href="#carte">À la carte</a>
+      <a href="#marmite">La marmite</a>
+      <a href="#questions">Questions</a>
+      <a class="bouton petit" href="#telecharger">Télécharger</a>
+    </nav>
+  </div>
+</header>
 
-    <section class="carte">
-      <h2>Tes données</h2>
-      <p>Pas de publicité, pas de traceur. Tout est expliqué dans les <a href="confidentialite.html">règles de confidentialité</a>.</p>
-    </section>
+<main id="haut">
 
-    <footer>Mon Petit Cuistot · <a href="confidentialite.html">Confidentialité</a> · <a href="mailto:contact@monpetitcuistot.fr">Contact</a></footer>
-  </main>
+  <!-- ===================================================== Héros -->
+  <section class="heros">
+    <div class="conteneur">
+      <div>
+        <span class="surtitre">Ton assistant de cuisine</span>
+        <h1>Qu'est-ce qu'on mange <em>ce soir&nbsp;?</em></h1>
+        <p class="intro">Dis ce qui te fait envie, le petit cuistot s'occupe du reste&nbsp;: des idées pensées pour tes goûts et ton frigo, la recette pas à pas, et même la liste de courses.</p>
+        <div class="badges-heros">
+          <span class="pastille"><svg><use href="#i-coche"/></svg>Gratuit</span>
+          <span class="pastille"><svg><use href="#i-coche"/></svg>Sans pub</span>
+          <span class="pastille"><svg><use href="#i-coche"/></svg>Utilisable sans compte</span>
+        </div>
+        <div class="stores">
+          <a class="store" href="#telecharger"><svg><use href="#i-telephone"/></svg><span><small>Bientôt sur</small><strong>App Store</strong></span></a>
+          <a class="store" href="#telecharger"><svg><use href="#i-robot"/></svg><span><small>Bientôt sur</small><strong>Google Play</strong></span></a>
+        </div>
+      </div>
+
+      <div class="scene">
+        <img class="mascotte-heros" src="img/cuistot-hello.webp" alt="Le petit cuistot, mascotte de l'application, salue de la main" width="300" height="560">
+        <div class="telephone" aria-label="Aperçu de l'application : le générateur de recettes" role="img">
+          <div class="ilot"></div>
+          <div class="ecran">
+            <div class="barre-etat"><span id="heure-tel">19:42</span><span>5G</span></div>
+            <div class="app-titre">Qu'est-ce qu'on mange&nbsp;?</div>
+            <div class="champ"><svg><use href="#i-etincelle"/></svg><span class="frappe" id="envie"></span></div>
+            <div class="modes" id="modes"><span class="actif">Libre</span><span>Avec courses</span><span>Frigo seul</span></div>
+            <div class="reflexion" id="reflexion"><span><i></i><i></i><i></i></span>Le cuistot réfléchit…</div>
+            <div class="idees" id="idees"></div>
+            <div class="barre-onglets">
+              <svg><use href="#i-maison"/></svg><svg><use href="#i-casserole"/></svg>
+              <span class="plus"><svg><use href="#i-plus"/></svg></span>
+              <svg><use href="#i-livre"/></svg><svg><use href="#i-perso"/></svg>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================================================== Ardoise -->
+  <div class="ardoise" aria-label="Au menu : idées sur mesure, anti-gaspi, courses par rayon, minuteurs, guide du cuistot">
+    <div class="defilant" aria-hidden="true">
+      <span>Idées sur mesure</span><span>Frigo anti-gaspi</span><span>Menu de la semaine</span><span>Courses par rayon</span><span>Mode « Je cuisine »</span><span>Minuteurs sur l'écran verrouillé</span><span>Le guide du Petit Cuistot</span><span>Recettes notées en toques</span>
+      <span>Idées sur mesure</span><span>Frigo anti-gaspi</span><span>Menu de la semaine</span><span>Courses par rayon</span><span>Mode « Je cuisine »</span><span>Minuteurs sur l'écran verrouillé</span><span>Le guide du Petit Cuistot</span><span>Recettes notées en toques</span>
+    </div>
+  </div>
+
+  <!-- ===================================================== À la carte -->
+  <section class="bloc" id="carte">
+    <div class="conteneur">
+      <div class="tete-section apparait">
+        <span class="surtitre">À la carte</span>
+        <h2>Toute ta cuisine, <span class="accroche">dans ta poche</span></h2>
+        <p>Du « je n'ai aucune idée » au « c'était délicieux », le petit cuistot t'accompagne à chaque étape.</p>
+      </div>
+
+      <article class="plat apparait">
+        <div class="texte-plat">
+          <span class="numero">Entrée</span>
+          <h3>Des idées qui te ressemblent</h3>
+          <p>Une envie, un ingrédient, une contrainte de temps&nbsp;: tu dis, il propose. Les idées respectent ton régime, les aliments que tu évites et le nombre de personnes à table.</p>
+          <ul>
+            <li><svg><use href="#i-coche"/></svg>Trois façons de chercher&nbsp;: libre, avec un passage en courses, ou rien qu'avec ton frigo.</li>
+            <li><svg><use href="#i-coche"/></svg>La recette complète, les termes techniques expliqués.</li>
+            <li><svg><use href="#i-coche"/></svg>Les valeurs nutritionnelles estimées par portion.</li>
+          </ul>
+        </div>
+        <div class="visuel-plat">
+          <img class="pose droite" src="img/cuistot-idea.webp" alt="" width="150" height="246" loading="lazy">
+          <div class="carte-app">
+            <h4>Mes préférences</h4>
+            <div class="ligne"><span>Régime</span><span class="etiquette ok">Sans porc</span></div>
+            <div class="ligne"><span>À éviter</span><span class="etiquette bientot">Coriandre</span></div>
+            <div class="ligne"><span>À table</span><strong>4 personnes</strong></div>
+            <div class="ligne"><span>Temps</span><strong>Moins de 30 min</strong></div>
+            <div class="ligne"><span>Budget</span><strong>Petit budget</strong></div>
+          </div>
+        </div>
+      </article>
+
+      <article class="plat inverse apparait">
+        <div class="texte-plat">
+          <span class="numero">Plat n°1</span>
+          <h3>Un frigo qui ne gaspille plus</h3>
+          <p>Note ce que tu as, avec les dates limites si tu veux. Les produits à finir vite remontent en haut, et le cuistot te propose des recettes pour les sauver.</p>
+          <ul>
+            <li><svg><use href="#i-coche"/></svg>Ajout en une phrase&nbsp;: « 3 courgettes, un pot de crème qui finit jeudi ».</li>
+            <li><svg><use href="#i-coche"/></svg>Un rappel avant les dates limites, à l'heure qui t'arrange.</li>
+            <li><svg><use href="#i-coche"/></svg>Après avoir cuisiné, le stock se met à jour tout seul.</li>
+          </ul>
+        </div>
+        <div class="visuel-plat">
+          <img class="pose gauche" src="img/cuistot-fridge.webp" alt="" width="150" height="208" loading="lazy">
+          <div class="carte-app">
+            <h4>À utiliser vite</h4>
+            <div class="ligne"><span>Blanc de poulet</span><span class="etiquette urgent">Aujourd'hui</span></div>
+            <div class="ligne"><span>Courgettes · 3</span><span class="etiquette bientot">Demain</span></div>
+            <div class="ligne"><span>Crème fraîche</span><span class="etiquette bientot">Jeudi</span></div>
+            <div class="ligne"><span>Parmesan</span><span class="etiquette ok">Dans 12 jours</span></div>
+            <p style="margin:14px 0 0"><span class="bouton petit"><svg><use href="#i-etincelle"/></svg>Idées anti-gaspi</span></p>
+          </div>
+        </div>
+      </article>
+
+      <article class="plat apparait">
+        <div class="texte-plat">
+          <span class="numero">Plat n°2</span>
+          <h3>Le menu de la semaine, les courses en prime</h3>
+          <p>Glisse tes recettes dans la semaine, midi et soir. La liste de courses se remplit avec ce qui manque, rangée par rayon pour filer dans le magasin.</p>
+          <ul>
+            <li><svg><use href="#i-coche"/></svg>Les quantités ajustées au nombre de personnes.</li>
+            <li><svg><use href="#i-coche"/></svg>Un mode magasin&nbsp;: tu coches, ça file dans ton stock.</li>
+          </ul>
+        </div>
+        <div class="visuel-plat">
+          <img class="pose droite" src="img/cuistot-shopping.webp" alt="" width="150" height="226" loading="lazy">
+          <div class="carte-app">
+            <h4>Cette semaine</h4>
+            <div class="semaine" aria-hidden="true"><span class="rempli">L</span><span class="rempli">M</span><span>M</span><span class="rempli">J</span><span class="rempli">V</span><span class="rempli">S</span><span>D</span></div>
+            <div class="rayon">Fruits et légumes</div>
+            <div class="coche fait"><i></i><span>Tomates</span><em>×4</em></div>
+            <div class="coche"><i></i><span>Basilic frais</span><em>1 botte</em></div>
+            <div class="rayon">Crèmerie</div>
+            <div class="coche fait"><i></i><span>Mozzarella</span><em>2</em></div>
+            <div class="rayon">Épicerie</div>
+            <div class="coche"><i></i><span>Linguine</span><em>500 g</em></div>
+          </div>
+        </div>
+      </article>
+
+      <article class="plat inverse apparait">
+        <div class="texte-plat">
+          <span class="numero">Plat n°3</span>
+          <h3>« Je cuisine »&nbsp;: une étape à la fois</h3>
+          <p>Le mode cuisine affiche les étapes en grand, garde l'écran allumé et lance les minuteurs au bon moment. Plusieurs à la fois si tu as plusieurs feux.</p>
+          <ul>
+            <li><svg><use href="#i-coche"/></svg>Le minuteur reste visible sur l'écran verrouillé et dans la Dynamic Island.</li>
+            <li><svg><use href="#i-coche"/></svg>Une sonnerie au choix&nbsp;: carillon, cloche, marimba ou rétro.</li>
+          </ul>
+        </div>
+        <div class="visuel-plat">
+          <img class="pose gauche" src="img/cuistot-timer.webp" alt="" width="150" height="276" loading="lazy">
+          <div class="verrou" aria-label="Écran verrouillé avec le minuteur de la tarte aux pommes" role="img">
+            <div class="date" id="date-verrou">mardi 17 novembre</div>
+            <div class="heure" id="heure-verrou">19:42</div>
+            <div class="activite">
+              <img src="img/cuistot-timer.webp" alt="" width="34" height="62" loading="lazy">
+              <div class="infos">
+                <strong>Tarte aux pommes</strong>
+                <small><span>Étape 3 · </span><span id="pret-a">prêt à 19:58</span></small>
+                <div class="barre"><b id="barre-chrono"></b></div>
+              </div>
+              <div class="chrono" id="chrono">15:42</div>
+            </div>
+            <div class="raccourcis" aria-hidden="true"><i><svg><use href="#i-lampe"/></svg></i><i><svg><use href="#i-photo"/></svg></i></div>
+          </div>
+        </div>
+      </article>
+
+      <article class="plat apparait">
+        <div class="texte-plat">
+          <span class="numero">Fromage ou dessert</span>
+          <h3>Le guide du Petit Cuistot</h3>
+          <p>Saisir une viande, réussir un riz, conserver ses herbes, ne plus rien jeter&nbsp;: des fiches courtes et illustrées pour progresser à ton rythme.</p>
+          <ul>
+            <li><svg><use href="#i-coche"/></svg>Des schémas animés pour comprendre les gestes.</li>
+            <li><svg><use href="#i-coche"/></svg>Ta progression, et une médaille par rubrique terminée.</li>
+          </ul>
+        </div>
+        <div class="visuel-plat">
+          <img class="pose droite" src="img/cuistot-reading.webp" alt="" width="150" height="311" loading="lazy">
+          <div class="carte-app">
+            <h4>Techniques de base</h4>
+            <div class="fiche-progres"><b></b></div>
+            <div class="schema" aria-hidden="true">
+              <div class="poele"><div class="vapeur"><i></i><i></i><i></i></div><div class="grillade"></div></div>
+            </div>
+            <strong style="font-family:var(--titre);font-size:1.1rem">Saisir une viande</strong>
+            <p style="margin:6px 0 0;color:var(--secondaire);font-size:0.95rem">Poêle bien chaude, viande sèche, et surtout&nbsp;: on ne la touche pas pendant deux minutes.</p>
+          </div>
+        </div>
+      </article>
+
+      <article class="plat inverse apparait">
+        <div class="texte-plat">
+          <span class="numero">Le café</span>
+          <h3>Un carnet noté en toques</h3>
+          <p>Tes recettes, tes photos, tes notes&nbsp;: tout est rangé et retrouvé en un instant. Tu notes de une à cinq toques, et tu partages tes pépites avec un simple code.</p>
+          <ul>
+            <li><svg><use href="#i-coche"/></svg>Filtres viande, poisson, végétarien, « à tester » ou « déjà faites ».</li>
+            <li><svg><use href="#i-coche"/></svg>Tes recettes sauvegardées et synchronisées sur tous tes appareils.</li>
+          </ul>
+        </div>
+        <div class="visuel-plat">
+          <img class="pose gauche" src="img/cuistot-tasting.webp" alt="" width="150" height="273" loading="lazy">
+          <div class="carte-app">
+            <div class="photo-recette" aria-hidden="true"><i style="left:44%;top:46%"></i><i style="left:54%;top:58%"></i><i style="left:48%;top:63%"></i></div>
+            <span class="cat vege">Végétarien</span>
+            <h4 style="margin:10px 0 0;color:var(--chocolat);font-style:normal">Risotto aux champignons</h4>
+            <div class="toques" aria-label="Noté 4 toques sur 5" role="img">
+              <svg><use href="#i-toque"/></svg><svg><use href="#i-toque"/></svg><svg><use href="#i-toque"/></svg><svg><use href="#i-toque"/></svg><svg class="vide"><use href="#i-toque"/></svg>
+            </div>
+            <div class="code-partage"><span>Code de partage</span><b>K7QF-M2XP</b></div>
+          </div>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- ===================================================== Marmite -->
+  <section class="bloc" id="marmite" style="padding-top:0">
+    <div class="conteneur">
+      <div class="marmite apparait">
+        <div>
+          <span class="surtitre">À toi de jouer</span>
+          <h2 style="font-size:clamp(1.9rem,4vw,2.6rem)">Fais tourner <span class="accroche">la marmite</span></h2>
+          <p style="color:var(--secondaire);margin-top:14px">Choisis ce qu'il te reste dans le frigo, le cuistot te souffle une idée.</p>
+          <div class="ingredients" id="ingredients" role="group" aria-label="Ingrédients disponibles"></div>
+          <button class="bouton" id="mijoter" type="button"><svg><use href="#i-casserole"/></svg>Faire mijoter</button>
+          <p class="note-demo">Un avant-goût&nbsp;: dans l'app, le cuistot rédige de vraies recettes, adaptées à tes préférences.</p>
+        </div>
+        <div class="resultat" id="resultat" aria-live="polite">
+          <img src="img/cuistot-stiring.webp" alt="" width="120" height="234" loading="lazy">
+          <div class="plat-propose" id="plat-propose">Prêt à mijoter</div>
+          <p id="plat-detail">Tomates, œufs et oignon t'attendent. Ajoute ou retire des ingrédients, puis fais mijoter.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================================================== Engagements -->
+  <section class="bloc" style="padding-top:0">
+    <div class="conteneur">
+      <div class="tete-section centre apparait">
+        <span class="surtitre">La maison s'engage</span>
+        <h2>Une cuisine <span class="accroche">honnête</span></h2>
+      </div>
+      <div class="engagements">
+        <div class="engagement apparait"><div class="icone"><svg><use href="#i-pub"/></svg></div><h3>Zéro pub</h3><p>Aucune publicité, aucun traceur, aucune revente de données. Jamais.</p></div>
+        <div class="engagement apparait"><div class="icone"><svg><use href="#i-cle"/></svg></div><h3>Sans compte</h3><p>Carnet, stock et courses marchent sans inscription. Le compte sert à synchroniser et aux idées du cuistot.</p></div>
+        <div class="engagement apparait"><div class="icone"><svg><use href="#i-bouclier"/></svg></div><h3>Tes données</h3><p>Exporte ton carnet quand tu veux, supprime ton compte en deux gestes&nbsp;: tout part avec.</p></div>
+        <div class="engagement apparait"><div class="icone"><svg><use href="#i-feuille"/></svg></div><h3>Anti-gaspi</h3><p>Le stock et ses rappels t'aident à cuisiner ce que tu as avant de racheter.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================================================== FAQ -->
+  <section class="bloc" id="questions" style="padding-top:0">
+    <div class="conteneur">
+      <div class="tete-section centre apparait">
+        <span class="surtitre">Questions</span>
+        <h2>On te répond <span class="accroche">sans détour</span></h2>
+      </div>
+      <div class="faq apparait">
+        <details><summary>L'application est-elle gratuite&nbsp;?</summary><p>Oui, entièrement gratuite et sans publicité. Pour éviter les abus, le nombre d'idées demandées au cuistot est limité chaque jour, largement de quoi cuisiner tous les jours.</p></details>
+        <details><summary>Faut-il créer un compte&nbsp;?</summary><p>Non. Le carnet, le stock, le menu, les courses et le guide fonctionnent sans compte. Un compte gratuit (e-mail, Google ou Apple) permet de demander des idées au cuistot et de retrouver tes données sur tous tes appareils.</p></details>
+        <details><summary>D'où viennent les recettes&nbsp;?</summary><p>Le cuistot les rédige pour toi avec une intelligence artificielle, à partir de tes envies, de tes préférences et de ce que tu as sous la main. Tu peux ensuite les modifier, les annoter et leur poser des questions.</p></details>
+        <details><summary>Sur quels téléphones&nbsp;?</summary><p>iPhone et Android. L'application arrive bientôt sur l'App Store et Google Play.</p></details>
+        <details><summary>Que deviennent mes données&nbsp;?</summary><p>Elles restent les tiennes&nbsp;: rien n'est revendu ni utilisé pour de la publicité. Tout est détaillé dans les <a href="confidentialite.html">règles de confidentialité</a>.</p></details>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================================================== Appel final -->
+  <section class="bloc" id="telecharger" style="padding-top:0">
+    <div class="conteneur">
+      <div class="final apparait">
+        <img src="img/cuistot-gold.webp" alt="Le petit cuistot fier de sa médaille" width="140" height="257" loading="lazy">
+        <h2>Le petit cuistot arrive bientôt</h2>
+        <p>Il finit de dresser l'assiette. Laisse-nous ton adresse, on te prévient dès qu'il est en cuisine.</p>
+        <div class="stores">
+          <a class="store" href="mailto:contact@monpetitcuistot.fr?subject=Pr%C3%A9viens-moi%20de%20la%20sortie%20de%20Mon%20Petit%20Cuistot&body=Bonjour%2C%20je%20voudrais%20%C3%AAtre%20pr%C3%A9venu%20quand%20l'application%20sort.%20Mon%20t%C3%A9l%C3%A9phone%20%3A%20iPhone%20%2F%20Android"><svg><use href="#i-courrier"/></svg><span><small>Être prévenu</small><strong>Préviens-moi</strong></span></a>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="pied">
+  <div class="conteneur">
+    <a class="marque" href="#haut"><img src="img/icone.webp" alt="" width="36" height="36" loading="lazy">Mon Petit Cuistot</a>
+    <nav aria-label="Liens utiles">
+      <a href="confidentialite.html">Confidentialité</a>
+      <a href="mailto:contact@monpetitcuistot.fr">contact@monpetitcuistot.fr</a>
+    </nav>
+  </div>
+</footer>
+
+<script src="site.js" defer></script>
 </body>
 </html>
